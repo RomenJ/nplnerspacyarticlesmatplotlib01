@@ -1,7 +1,9 @@
 import spacy
 import pandas as pd
+from spacy import displacy
+import seaborn as sns
 import matplotlib.pyplot as plt
-#Named Entity Recognition List: https://notebook.community/rishuatgithub/MLPy/nlp/UPDATED_NLP_COURSE/02-Parts-of-Speech-Tagging/02-NER-Named-Entity-Recognition
+
 # Cargar el modelo de inglés
 nlp = spacy.load('en_core_web_sm')
 
@@ -13,14 +15,19 @@ def load_article(file_path):
 
 # Ruta al archivo de texto"articles.txt"
 article_file_path = "articles.txt"
-#uber_apple
 #article_file_path = "uber_apple.txt"
+
 # Cargar el artículo desde el archivo
 article = load_article(article_file_path)
-print("Líneas del archivo",len(article) )
 
+print("Líneas del archivo",len(article) )
 # Crear un nuevo documento
 doc = nlp(article)
+
+# Visualizar en HTML
+html = displacy.render(doc, style='ent', page=True)
+with open('output.html', 'w', encoding='utf-8') as file:
+    file.write(html)
 
 # Crear un DataFrame para almacenar las entidades encontradas
 entidadesEncontradas = pd.DataFrame(columns=['Texto', 'Categoría'])
@@ -40,4 +47,7 @@ plt.ylabel('Cantidad')
 plt.title('Conteo de Categorías de Entidades')
 plt.xticks(rotation=45)
 plt.tight_layout()
+plt.savefig('plot.png')
+
+# Mostrar la gráfica
 plt.show()
