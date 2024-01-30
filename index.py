@@ -12,9 +12,9 @@ def load_article(file_path):
     return article_content
 
 # Ruta al archivo de texto"articles.txt"
-#article_file_path = "articles.txt"
+article_file_path = "articles.txt"
 #uber_apple
-article_file_path = "uber_apple.txt"
+#article_file_path = "uber_apple.txt"
 # Cargar el artículo desde el archivo
 article = load_article(article_file_path)
 print("Líneas del archivo",len(article) )
